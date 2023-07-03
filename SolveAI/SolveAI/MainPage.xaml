@@ -1,41 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SolveAI.MainPage">
+             x:Class="SolveAI.MainPage"
+             Shell.NavBarIsVisible="false">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
+    <Grid VerticalOptions="Fill" 
+          HorizontalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout Grid.Row="0" VerticalOptions="Center">
+            <HorizontalStackLayout VerticalOptions="Center">
+                <Label Text="Status:" Margin="10"/>
+                <Label x:Name="Status" Text="Not Running" Margin="10"/>
+                <ActivityIndicator x:Name="Running" IsRunning="False" Margin="50,0,0,0" HorizontalOptions="End"/>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
-    </ScrollView>
+        <VerticalStackLayout Grid.Row="1" BackgroundColor="#efefef">
+        </VerticalStackLayout>
+        <Grid Grid.Row="2" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Entry Grid.Column="0" Grid.ColumnSpan="2" PlaceholderColor="#44e" Placeholder="Type your question here" VerticalOptions="Center" HorizontalOptions="Fill"/>
+            <Button Grid.Column="2" Text="Submit" Padding="0" CornerRadius="40" VerticalOptions="Center"/>
+        </Grid>
+    </Grid>
 
 </ContentPage>

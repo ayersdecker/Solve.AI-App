@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SolveAI.Settings"
+             Shell.NavBarIsVisible="false"
+             Title="Settings">
+    <VerticalStackLayout>
+        <Label Text="OpenAI API Key" Margin="10,50,10,0" FontSize="15" FontAttributes="Bold"/>
+        <Entry x:Name="ApiKeyEntry" Placeholder="API KEY HERE" FontSize="12" Margin="10,20,10,0"/>
+        <Grid HorizontalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="OpenAiInfoButton"
+                    Grid.Column="0"
+                            Text="Where do I find a key ?"
+                            WidthRequest="200"
+                            Margin="10,0,0,0"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            Clicked="OpenAiInfoButton_Clicked"/>
+            <ImageButton 
+                Grid.Column="1" 
+                Source="save" 
+                VerticalOptions="Center" 
+                HeightRequest="30" 
+                WidthRequest="40" 
+                Margin="10" 
+                Opacity=".8" 
+                Clicked="Save_Clicked"/>
+            
+        </Grid>
+        
+
+    </VerticalStackLayout>
+</ContentPage>

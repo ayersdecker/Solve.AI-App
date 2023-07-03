@@ -6,9 +6,20 @@
     xmlns:local="clr-namespace:SolveAI"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab Title="Solve" 
+             Icon="ai">
+            <ShellContent
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+        </Tab>
+        <Tab Title="Settings"
+             Icon="settings">
+            <ShellContent
+            ContentTemplate="{DataTemplate local:Settings}"
+            Route="Settings"/>
+        </Tab>
+        
+    </TabBar>
 
 </Shell>
