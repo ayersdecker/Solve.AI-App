@@ -25,6 +25,11 @@ public partial class Settings : ContentPage
         }
         else
         {
+            using (var writer = new StreamWriter(fullPath))
+            {
+                writer.WriteLine(apiKey);
+                writer.Close();
+            }
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             string text = "API Key Saved";
             ToastDuration duration = ToastDuration.Short;

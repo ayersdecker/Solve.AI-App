@@ -11,9 +11,27 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
     }
 
-    private void Submit_Clicked(object sender, EventArgs e)
+    private async void Submit_Clicked(object sender, EventArgs e)
     {
+        
+        try
+        {
+            Running.IsRunning = true;
+            Status.Text = "Reading Key";
+            ReadAPIKey();
+            Status.Text = "Solving";
+            AIResponse response = await OpenAIService.AICALL("Solve this: " + Entry.Text, APIKey);
+            if (response != null)
+            {
+                ResponseText.Text = response.Text;
+                Status.Text = "Finished!";
+            }
+            Running.IsRunning = false;
+            Status.Text = "Ready";
 
+        }
+        catch { }
+        
 
 
 

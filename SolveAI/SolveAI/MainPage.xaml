@@ -15,14 +15,14 @@
         <VerticalStackLayout Grid.Row="0" VerticalOptions="Center">
             <HorizontalStackLayout VerticalOptions="Center">
                 <Label Text="Status:" Margin="10"/>
-                <Label x:Name="Status" Text="Not Running" Margin="10"/>
+                <Label x:Name="Status" Text="Ready" Margin="10"/>
                 <ActivityIndicator x:Name="Running" IsRunning="False" Margin="50,0,0,0" HorizontalOptions="End"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
         
         <VerticalStackLayout Grid.Row="1" BackgroundColor="#efefef">
             <ScrollView>
-                <Label x:Name="ResponseText" Text="Response" Margin="10"/>
+                <Label x:Name="ResponseText" Margin="10"/>
             </ScrollView>
         </VerticalStackLayout>
         
