@@ -21,9 +21,10 @@
         </VerticalStackLayout>
         
         <VerticalStackLayout Grid.Row="1" BackgroundColor="#efefef">
-            <ScrollView>
+            <VerticalStackLayout>
+                <Label Text="Response: "/>
                 <Label x:Name="ResponseText" Margin="10"/>
-            </ScrollView>
+            </VerticalStackLayout>
         </VerticalStackLayout>
         
         <Grid Grid.Row="2" HorizontalOptions="Fill" VerticalOptions="Fill">
