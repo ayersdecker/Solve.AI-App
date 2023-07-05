@@ -43,7 +43,12 @@
                    VerticalOptions="Center" 
                    HorizontalOptions="Fill"
                    Margin="10,0"/>
-            <Button Grid.Column="2" Text="Submit" Padding="0" CornerRadius="40" VerticalOptions="Center" Clicked="Submit_Clicked"/>
+            <Button Grid.Column="2" 
+                    Text="Submit" 
+                    Padding="0" 
+                    CornerRadius="40" 
+                    VerticalOptions="Center" 
+                    Clicked="Submit_Clicked"/>
         </Grid>
         
     </Grid>
