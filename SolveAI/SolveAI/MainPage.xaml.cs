@@ -18,6 +18,7 @@ public partial class MainPage : ContentPage
         {
             Running.IsRunning = true;
             Status.Text = "Reading Key";
+            ResponseText.Text = "";
             ReadAPIKey();
             Status.Text = "Solving";
             AIResponse response = await OpenAIService.AICALL("Solve this: " + Entry.Text, APIKey);

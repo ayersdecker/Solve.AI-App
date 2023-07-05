@@ -12,20 +12,22 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         
+        
         <VerticalStackLayout Grid.Row="0" VerticalOptions="Center">
             <HorizontalStackLayout VerticalOptions="Center">
-                <Label Text="Status:" Margin="10"/>
-                <Label x:Name="Status" Text="Ready" Margin="10"/>
+                <Label Text="Status:" Margin="10" FontAttributes="Bold" VerticalOptions="Center"/>
+                <Label x:Name="Status" Text="Ready" Margin="10" VerticalOptions="Center"/>
                 <ActivityIndicator x:Name="Running" IsRunning="False" Margin="50,0,0,0" HorizontalOptions="End"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
         
-        <VerticalStackLayout Grid.Row="1" BackgroundColor="#efefef">
-            <VerticalStackLayout>
-                <Label Text="Response: "/>
-                <Label x:Name="ResponseText" Margin="10"/>
+        
+        <ScrollView Grid.Row="1" BackgroundColor="#ddd">
+            <VerticalStackLayout VerticalOptions="FillAndExpand">
+                <Label x:Name="ResponseText" Margin="20,0" FontSize="Medium"/>
             </VerticalStackLayout>
-        </VerticalStackLayout>
+        </ScrollView>
+        
         
         <Grid Grid.Row="2" HorizontalOptions="Fill" VerticalOptions="Fill">
             <Grid.ColumnDefinitions>
@@ -33,9 +35,17 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <Entry x:Name="Entry" Grid.Column="0" Grid.ColumnSpan="2" PlaceholderColor="#44e" Placeholder="Type your question here" VerticalOptions="Center" HorizontalOptions="Fill"/>
+            <Entry x:Name="Entry" 
+                   Grid.Column="0" 
+                   Grid.ColumnSpan="2" 
+                   PlaceholderColor="#44e" 
+                   Placeholder="Type your question here" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   Margin="10,0"/>
             <Button Grid.Column="2" Text="Submit" Padding="0" CornerRadius="40" VerticalOptions="Center" Clicked="Submit_Clicked"/>
         </Grid>
+        
     </Grid>
 
 </ContentPage>
