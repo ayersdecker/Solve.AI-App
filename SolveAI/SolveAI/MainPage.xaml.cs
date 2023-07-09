@@ -1,5 +1,9 @@
 ﻿
 
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
+
 namespace SolveAI;
 
 public partial class MainPage : ContentPage
@@ -21,17 +25,18 @@ public partial class MainPage : ContentPage
             ResponseText.Text = "";
             ReadAPIKey();
             Status.Text = "Solving";
-            AIResponse response = await OpenAIService.AICALL("Solve this: " + Entry.Text, APIKey);
-            if (response != null)
-            {
-                ResponseText.Text = response.Text;
-                Status.Text = "Finished!";
-            }
+            await StreamChatCompletion("Solve this: " + Entry.Text, APIKey);
+
+            Status.Text = "Finished!";
+            
             Running.IsRunning = false;
             Status.Text = "Ready";
 
         }
-        catch { }
+        catch {
+            Running.IsRunning = false;
+            Status.Text = "API Fail";
+            }
         
 
 
@@ -51,6 +56,54 @@ public partial class MainPage : ContentPage
         }
         
     }
+    public async Task StreamChatCompletion(string message, string apiKey)
+    {
+        // API call
+        var client = new HttpClient();
+        apiKey = apiKey.Replace("\r", "").Replace("\n", " ").Replace("\"", " ");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+        var requestBody = new
+        {
+            model = "gpt-4-0613",
+            messages = new[]
+            {
+            new { role = "user", content = message }
+        },
+            temperature = 0,
+            max_tokens = 100,
+            stream = true
+        };
+
+        var jsonRequest = JsonConvert.SerializeObject(requestBody);
+
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Post,
+            RequestUri = new Uri("https://api.openai.com/v1/chat/completions"),
+            Content = new StringContent(jsonRequest, Encoding.UTF8, "application/json")
+        };
+
+        // Response Handling
+        var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
+        using (var responseStream = await response.Content.ReadAsStreamAsync())
+        using (var streamReader = new StreamReader(responseStream))
+        {
+            while (!streamReader.EndOfStream)
+            {
+                string chunk = await streamReader.ReadLineAsync();
+                try {
+                dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(chunk.Substring(6));
+
+                string content = jsonResponse.choices[0].delta.content;
+                ResponseText.Text += content;
+                    }
+                catch { }
+            }
+        }
+    }
+
 
 }
 

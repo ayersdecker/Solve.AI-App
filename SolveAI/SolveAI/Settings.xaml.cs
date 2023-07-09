@@ -7,9 +7,11 @@ namespace SolveAI;
 
 public partial class Settings : ContentPage
 {
+    public string APIKey;
 	public Settings()
 	{
 		InitializeComponent();
+        ReadAPIKey();
 	}
 
     // User Clicks Save Button
@@ -42,5 +44,20 @@ public partial class Settings : ContentPage
     private void OpenAiInfoButton_Clicked(object sender, EventArgs e)
     {
         Launcher.OpenAsync("https://platform.openai.com/account/api-keys");
+    }
+    private void ReadAPIKey()
+    {
+        var path = FileSystem.Current.AppDataDirectory;
+        var fullPath = Path.Combine(path, "APIKey.txt");
+        if (File.Exists(fullPath))
+        {
+            APIKey = File.ReadAllText(fullPath);
+            ApiKeyEntry.Text = APIKey;
+        }
+        else
+        {
+            DisplayAlert("API Key", "You need to save a valid API Key in your settings tab!", "Yessir");
+        }
+
     }
 }
